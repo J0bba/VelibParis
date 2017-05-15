@@ -97,13 +97,26 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        Log.e("QUERY", "Query : " + query);
-        return false;
+        FilterStations(query);
+        return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        Log.e("QUERY", "Query : " + newText);
-        return false;
+        FilterStations(newText);
+        return true;
+    }
+
+    private void FilterStations(String text)
+    {
+        List<StationItem> temp = new ArrayList<>();
+        for (StationItem station : stations)
+        {
+            if (station.getName().toLowerCase().contains(text.toLowerCase()))
+            {
+                temp.add(station);
+            }
+        }
+        recyclerView.setAdapter(new ListAdapter(temp));
     }
 }

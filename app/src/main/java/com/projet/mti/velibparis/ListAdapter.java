@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<StationItem> mDataset;
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTextView;
         private ImageView imageView;
@@ -25,7 +27,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
     }
     public ListAdapter(List<StationItem> data) {
-        //TODO REMPLACER PAR LAPPELLE AU WS
         mDataset = data;
     }
     @Override
