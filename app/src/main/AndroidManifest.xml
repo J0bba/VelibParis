@@ -13,13 +13,18 @@
         android:theme="@style/AppTheme">
         <meta-data android:name="android.app.searchable"
             android:resource="@xml/searchable" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity">
+        <activity android:name=".Detail.DetailsActivity"
+            android:parentActivityName=".Main.MainActivity">
+
+        </activity>
+        <activity android:name=".GroupDetails.GroupDetailsActivity"
+            android:parentActivityName=".Main.MainActivity">
 
         </activity>
     </application>

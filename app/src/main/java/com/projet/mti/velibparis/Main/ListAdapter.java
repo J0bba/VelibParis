@@ -1,4 +1,4 @@
-package com.projet.mti.velibparis;
+package com.projet.mti.velibparis.Main;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,7 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.projet.mti.velibparis.Detail.DetailsActivity;
+import com.projet.mti.velibparis.R;
+import com.projet.mti.velibparis.StationItem;
 
 import java.util.List;
 

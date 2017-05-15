@@ -1,13 +1,17 @@
-package com.projet.mti.velibparis;
+package com.projet.mti.velibparis.Detail;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.projet.mti.velibparis.API.RecordsAPI;
 import com.projet.mti.velibparis.API.WebServiceReturn;
+import com.projet.mti.velibparis.R;
+import com.projet.mti.velibparis.StationItem;
+import com.projet.mti.velibparis.WebService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +22,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Thiba on 15/05/2017.
- */
 
-public class DetailsActivity extends FragmentActivity{
+public class DetailsActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private DetailsAdapter adapter;
@@ -81,7 +82,13 @@ public class DetailsActivity extends FragmentActivity{
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         adapter = new DetailsAdapter(getSupportFragmentManager(), stations);
         viewPager.setAdapter(adapter);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.my_toolbar);
+        toolbar.setTitle(getString(R.string.detail));
+        setSupportActionBar(toolbar);
         collectData();
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override

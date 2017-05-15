@@ -3,4 +3,9 @@
     <string name="search">Rechercher</string>
     <string name="searchHint">Rechercher une station spécifique</string>
     <string name="mainTitle">Liste des stations</string>
+    <string name="memberList">Liste des membres du groupe</string>
+    <string name="titleGroup">Details du groupe</string>
+    <string name="detail">Details</string>
+    <string name="wida">Benjamin Widaski</string>
+    <string name="virso">Thibault Virsolvy</string>
 </resources>

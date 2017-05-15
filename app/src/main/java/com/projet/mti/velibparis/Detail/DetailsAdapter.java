@@ -1,8 +1,10 @@
-package com.projet.mti.velibparis;
+package com.projet.mti.velibparis.Detail;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.projet.mti.velibparis.StationItem;
 
 import java.util.List;
 

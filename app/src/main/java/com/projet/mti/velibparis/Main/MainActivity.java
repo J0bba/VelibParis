@@ -1,5 +1,6 @@
-package com.projet.mti.velibparis;
+package com.projet.mti.velibparis.Main;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,9 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.projet.mti.velibparis.API.RecordsAPI;
 import com.projet.mti.velibparis.API.WebServiceReturn;
+import com.projet.mti.velibparis.GroupDetails.GroupDetailsActivity;
+import com.projet.mti.velibparis.R;
+import com.projet.mti.velibparis.StationItem;
+import com.projet.mti.velibparis.WebService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +92,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         SearchView searchView = (SearchView)menu.findItem(R.id.search).getActionView();
         searchView.setOnQueryTextListener(this);
+
+        MenuItem groupButton = menu.findItem(R.id.member_list);
+        groupButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(getBaseContext(), GroupDetailsActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        });
 
 
         return super.onCreateOptionsMenu(menu);

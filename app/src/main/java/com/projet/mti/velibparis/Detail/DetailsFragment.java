@@ -1,12 +1,14 @@
-package com.projet.mti.velibparis;
+package com.projet.mti.velibparis.Detail;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.projet.mti.velibparis.R;
+import com.projet.mti.velibparis.StationItem;
 
 /**
  * Created by Thiba on 15/05/2017.
