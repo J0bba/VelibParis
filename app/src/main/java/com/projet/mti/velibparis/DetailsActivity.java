@@ -59,7 +59,6 @@ public class DetailsActivity extends FragmentActivity{
                                 recordsAPIs.get(i).getFields().getName()));
                     }
                     adapter.setData(stations);
-                    Log.e("FATAL", Integer.toString(getIntent().getIntExtra("Station", 0)));
                     viewPager.setCurrentItem(getIndexByName(getIntent().getStringExtra("Station")));
                 } else {
                     //Error

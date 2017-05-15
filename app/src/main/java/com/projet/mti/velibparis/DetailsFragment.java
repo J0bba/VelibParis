@@ -30,7 +30,6 @@ public class DetailsFragment extends Fragment {
                 R.layout.details_fragment, container, false);
 
         StationItem item = (StationItem) getArguments().getSerializable("item");
-        Log.e("FATAL", item.getName());
 
         textTitle = (TextView) rootView.findViewById(R.id.details_title);
         textTitle.setText(item.getName());
