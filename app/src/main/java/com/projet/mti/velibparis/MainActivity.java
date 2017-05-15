@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import com.projet.mti.velibparis.API.RecordsAPI;
 import com.projet.mti.velibparis.API.WebServiceReturn;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,13 +25,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private ListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<StationItem> stations;
+    private List<StationItem> stations = new ArrayList<>();
 
-    private void collectData()
+    public void collectData()
     {
-        stations = new ArrayList<>();
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(WebService.ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -50,9 +48,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                         stations.add(new StationItem(recordsAPIs.get(i).getFields().getStatus(),
                                                      recordsAPIs.get(i).getFields().getName()));
                     }
-
-                    adapter = new ListAdapter(stations);
-                    recyclerView.setAdapter(adapter);
+                    adapter.setData(stations);
                 } else {
                     //Error
                 }
@@ -69,8 +65,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO Call coroutine
-        collectData();
+
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -79,8 +74,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        //adapter = new ListAdapter(stations);
-        //recyclerView.setAdapter(adapter);
+        adapter = new ListAdapter(stations);
+        recyclerView.setAdapter(adapter);
+        collectData();
     }
 
     @Override
@@ -117,6 +113,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 temp.add(station);
             }
         }
-        recyclerView.setAdapter(new ListAdapter(temp));
+        adapter.setData(temp);
     }
 }
