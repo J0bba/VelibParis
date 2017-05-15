@@ -1,10 +1,12 @@
 package com.projet.mti.velibparis;
 
+import java.io.Serializable;
+
 /**
  * Created by Thiba on 15/05/2017.
  */
 
-public class StationItem {
+public class StationItem  implements Serializable{
     private boolean open;
     private String name;
 

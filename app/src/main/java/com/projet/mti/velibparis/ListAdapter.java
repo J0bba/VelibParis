@@ -1,5 +1,6 @@
 package com.projet.mti.velibparis;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,9 +23,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         private ImageView imageView;
         public ViewHolder(View v) {
             super(v);
+
             mTextView = (TextView) v.findViewById(R.id.list_text_item);
             imageView = (ImageView)v.findViewById(R.id.list_status_image);
+            v.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view)
+                {
+                    Intent intent = new Intent(view.getContext(), DetailsActivity.class);
+                    intent.putExtra("Station", mTextView.getText());
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
+
     }
     public ListAdapter(List<StationItem> data) {
         mDataset = data;
