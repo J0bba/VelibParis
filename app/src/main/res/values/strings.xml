@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">VelibParis</string>
     <string name="search">Rechercher</string>
+    <string name="searchHint">Search a specific station</string>
 </resources>
