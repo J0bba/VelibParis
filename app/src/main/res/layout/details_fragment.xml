@@ -11,4 +11,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/details_status"
+            android:text="@string/status"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bike_stands_details"
+            android:text="@string/bike_stands_details"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/available_bike_stands"
+            android:text="@string/available_bike_stands"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/address_details"
+            android:text="@string/address_details"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/last_update_details"
+            android:text="@string/last_update_details"/>
 </LinearLayout>

@@ -8,4 +8,9 @@
     <string name="detail">Details</string>
     <string name="wida">Benjamin Widaski</string>
     <string name="virso">Thibault Virsolvy</string>
+    <string name="status">Status :</string>
+    <string name="bike_stands_details">Nombre de places dans la station :</string>
+    <string name="available_bike_stands">Nombre de places disponibles :</string>
+    <string name="address_details">Addresse :</string>
+    <string name="last_update_details">Dernière mise à jour :</string>
 </resources>

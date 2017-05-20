@@ -44,4 +44,12 @@ public class FieldsAPI {
     public String getStatus() {
         return status;
     }
+
+    public String getLast_update() { return last_update; }
+
+    public int getBike_stands(){ return bike_stands; }
+
+    public int getAvailable_bike_stands() { return available_bike_stands; }
+
+    public String getAddress() {return address;}
 }

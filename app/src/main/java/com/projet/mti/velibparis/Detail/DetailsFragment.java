@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Thiba on 15/05/2017.
  */
@@ -24,6 +26,11 @@ public class DetailsFragment extends Fragment {
         return f;
     }
     private TextView textTitle;
+    private TextView statusLabel;
+    private TextView bike_stands;
+    private TextView available_bike_stands;
+    private TextView addres;
+    private TextView last_update;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,6 +42,22 @@ public class DetailsFragment extends Fragment {
 
         textTitle = (TextView) rootView.findViewById(R.id.details_title);
         textTitle.setText(item.getName());
+
+        statusLabel = (TextView)rootView.findViewById(R.id.details_status);
+        statusLabel.setText(statusLabel.getText() + " " + item.getStatusString());
+
+        bike_stands = (TextView)rootView.findViewById(R.id.bike_stands_details);
+        bike_stands.setText(bike_stands.getText() + " " + item.getRooms());
+
+        available_bike_stands = (TextView)rootView.findViewById(R.id.available_bike_stands);
+        available_bike_stands.setText(available_bike_stands.getText() + " " + item.getAvailableRooms());
+
+        addres = (TextView)rootView.findViewById(R.id.address_details);
+        addres.setText(addres.getText() + " " + item.getAddress());
+
+        last_update = (TextView)rootView.findViewById(R.id.last_update_details);
+        last_update.setText(last_update.getText() + " " + item.getUpdateDate().toString());
+
 
         return rootView;
     }

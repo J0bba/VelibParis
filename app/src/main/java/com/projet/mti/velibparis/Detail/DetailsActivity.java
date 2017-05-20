@@ -13,7 +13,10 @@ import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
 import com.projet.mti.velibparis.WebService;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,8 +59,19 @@ public class DetailsActivity extends AppCompatActivity {
                     ArrayList<RecordsAPI> recordsAPIs = returnService.getRecords();
                     for(int i = 0; i < recordsAPIs.size(); i++)
                     {
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssZ");
+                        Date update = null;
+                        try {
+                            update = df.parse(recordsAPIs.get(i).getFields().getLast_update());
+                        }
+                        catch (java.text.ParseException e)
+                        {}
                         stations.add(new StationItem(recordsAPIs.get(i).getFields().getStatus(),
-                                recordsAPIs.get(i).getFields().getName()));
+                                                     recordsAPIs.get(i).getFields().getName(),
+                                                     recordsAPIs.get(i).getFields().getBike_stands(),
+                                                     recordsAPIs.get(i).getFields().getAvailable_bike_stands(),
+                                                     recordsAPIs.get(i).getFields().getAddress(),
+                                                     update));
                     }
                     adapter.setData(stations);
                     viewPager.setCurrentItem(getIndexByName(getIntent().getStringExtra("Station")));
@@ -89,17 +103,5 @@ public class DetailsActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-        }
     }
 }
