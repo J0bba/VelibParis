@@ -70,4 +70,12 @@ public class StationItem  implements Serializable{
     public float getLongitude() {
         return longitude;
     }
+
+    @Override
+    public String toString() {
+        String res = "Station de velib : " + name + "\n";
+        res += "Adresse : " + address + "\n";
+        res += "Nombre de places disponibles : " + availableRooms;
+        return res;
+    }
 }

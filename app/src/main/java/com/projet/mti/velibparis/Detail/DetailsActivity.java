@@ -141,7 +141,8 @@ public class DetailsActivity extends AppCompatActivity {
             case R.id.share_detail:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                String text = stations.get(viewPager.getCurrentItem()).toString();
+                sendIntent.putExtra(Intent.EXTRA_TEXT, text);
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
                 return true;
