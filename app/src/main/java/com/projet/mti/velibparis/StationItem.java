@@ -22,7 +22,7 @@ public class StationItem  implements Serializable{
     {
         this.statusString = status;
         this.open = !status.equals("CLOSED");
-        this.name = name;
+        this.name = name.split("-")[1];
         this.rooms = rooms;
         this.availableRooms = availableRooms;
         this.address = address;
