@@ -1,5 +1,7 @@
 package com.projet.mti.velibparis.Detail;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,7 +31,7 @@ public class DetailsFragment extends Fragment {
     private TextView statusLabel;
     private TextView bike_stands;
     private TextView available_bike_stands;
-    private TextView addres;
+    private TextView address;
     private TextView last_update;
 
     @Override
@@ -38,7 +40,7 @@ public class DetailsFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.details_fragment, container, false);
 
-        StationItem item = (StationItem) getArguments().getSerializable("item");
+        final StationItem item = (StationItem) getArguments().getSerializable("item");
 
         textTitle = (TextView) rootView.findViewById(R.id.details_title);
         textTitle.setText(item.getName());
@@ -52,8 +54,17 @@ public class DetailsFragment extends Fragment {
         available_bike_stands = (TextView)rootView.findViewById(R.id.available_bike_stands);
         available_bike_stands.setText(available_bike_stands.getText() + " " + item.getAvailableRooms());
 
-        addres = (TextView)rootView.findViewById(R.id.address_details);
-        addres.setText(addres.getText() + " " + item.getAddress());
+        address = (TextView)rootView.findViewById(R.id.address_details);
+        address.setText(address.getText() + " " + item.getAddress());
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("geo:" + item.getLatitude() + ", " + item.getLongitude() + "?q=" + item.getAddress());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, uri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
 
         last_update = (TextView)rootView.findViewById(R.id.last_update_details);
         last_update.setText(last_update.getText() + " " + item.getUpdateDate().toString());

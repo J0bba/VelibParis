@@ -52,4 +52,6 @@ public class FieldsAPI {
     public int getAvailable_bike_stands() { return available_bike_stands; }
 
     public String getAddress() {return address;}
+
+    public ArrayList<Float> getPosition() { return position; }
 }

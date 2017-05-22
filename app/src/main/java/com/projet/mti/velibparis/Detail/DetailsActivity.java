@@ -1,14 +1,20 @@
 package com.projet.mti.velibparis.Detail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.projet.mti.velibparis.API.RecordsAPI;
 import com.projet.mti.velibparis.API.WebServiceReturn;
+import com.projet.mti.velibparis.GroupDetails.GroupDetailsActivity;
 import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
 import com.projet.mti.velibparis.WebService;
@@ -71,7 +77,9 @@ public class DetailsActivity extends AppCompatActivity {
                                                      recordsAPIs.get(i).getFields().getBike_stands(),
                                                      recordsAPIs.get(i).getFields().getAvailable_bike_stands(),
                                                      recordsAPIs.get(i).getFields().getAddress(),
-                                                     update));
+                                                     update,
+                                                     recordsAPIs.get(i).getFields().getPosition().get(0),
+                                                     recordsAPIs.get(i).getFields().getPosition().get(1)));
                     }
                     adapter.setData(stations);
                     viewPager.setCurrentItem(getIndexByName(getIntent().getStringExtra("Station")));
@@ -102,6 +110,33 @@ public class DetailsActivity extends AppCompatActivity {
         collectData();
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.details_activity_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.share_detail:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
+                return true;
+            case R.id.member_list:
+                Intent intent = new Intent(getBaseContext(), GroupDetailsActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

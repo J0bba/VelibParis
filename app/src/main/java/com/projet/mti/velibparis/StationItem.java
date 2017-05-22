@@ -15,8 +15,10 @@ public class StationItem  implements Serializable{
     private String address;
     private Date updateDate;
     private String statusString;
+    private float latitude;
+    private float longitude;
 
-    public StationItem(String status, String name, Integer rooms, Integer availableRooms, String address, Date updateDate)
+    public StationItem(String status, String name, Integer rooms, Integer availableRooms, String address, Date updateDate, float latitude, float longitude)
     {
         this.statusString = status;
         this.open = !status.equals("CLOSED");
@@ -25,6 +27,8 @@ public class StationItem  implements Serializable{
         this.availableRooms = availableRooms;
         this.address = address;
         this.updateDate = updateDate;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public boolean isOpen() {
@@ -57,5 +61,13 @@ public class StationItem  implements Serializable{
 
     public String getStatusString() {
         return statusString;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
     }
 }

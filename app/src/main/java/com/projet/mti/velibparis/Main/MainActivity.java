@@ -66,7 +66,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                                                      recordsAPIs.get(i).getFields().getBike_stands(),
                                                      recordsAPIs.get(i).getFields().getAvailable_bike_stands(),
                                                      recordsAPIs.get(i).getFields().getAddress(),
-                                                     update));
+                                                     update,
+                                                     recordsAPIs.get(i).getFields().getPosition().get(0),
+                                                     recordsAPIs.get(i).getFields().getPosition().get(1)));
                     }
                     adapter.setData(stations);
                 } else {
@@ -107,16 +109,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         SearchView searchView = (SearchView)menu.findItem(R.id.search).getActionView();
         searchView.setOnQueryTextListener(this);
 
-        MenuItem groupButton = menu.findItem(R.id.member_list);
-        groupButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(getBaseContext(), GroupDetailsActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        });
-
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -125,6 +117,19 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextSubmit(String query) {
         FilterStations(query);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.member_list :
+                Intent intent = new Intent(getBaseContext(), GroupDetailsActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

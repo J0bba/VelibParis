@@ -2,4 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/share_detail"
+        android:title="@string/share_detail"
+        android:icon="@drawable/ic_share_black_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/member_list"
+        android:title="@string/memberList"
+        android:icon="@drawable/ic_group_black_24dp"
+        app:showAsAction="ifRoom"/>
 </menu>
