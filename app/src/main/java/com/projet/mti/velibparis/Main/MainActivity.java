@@ -1,6 +1,9 @@
 package com.projet.mti.velibparis.Main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +14,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.projet.mti.velibparis.API.RecordsAPI;
 import com.projet.mti.velibparis.API.WebServiceReturn;
@@ -18,6 +23,8 @@ import com.projet.mti.velibparis.GroupDetails.GroupDetailsActivity;
 import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
 import com.projet.mti.velibparis.WebService;
+
+import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -98,7 +105,18 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ListAdapter(stations);
         recyclerView.setAdapter(adapter);
-        collectData();
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected())
+            collectData();
+        else
+        {
+            recyclerView.setVisibility(View.GONE);
+            TextView nointernet = (TextView)findViewById(R.id.no_internet_text);
+            nointernet.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override

@@ -1,6 +1,9 @@
 package com.projet.mti.velibparis.Detail;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -11,6 +14,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.projet.mti.velibparis.API.RecordsAPI;
 import com.projet.mti.velibparis.API.WebServiceReturn;
@@ -107,9 +112,18 @@ public class DetailsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.my_toolbar);
         toolbar.setTitle(getString(R.string.detail));
         setSupportActionBar(toolbar);
-        collectData();
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected())
+            collectData();
+        else {
+            viewPager.setVisibility(View.GONE);
+            TextView nointernet = (TextView) findViewById(R.id.no_internet_text);
+            nointernet.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
