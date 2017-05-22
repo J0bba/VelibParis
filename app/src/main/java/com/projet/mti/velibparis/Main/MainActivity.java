@@ -24,7 +24,6 @@ import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
 import com.projet.mti.velibparis.WebService;
 
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

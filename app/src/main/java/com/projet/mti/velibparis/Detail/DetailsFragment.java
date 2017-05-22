@@ -1,9 +1,11 @@
 package com.projet.mti.velibparis.Detail;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,10 @@ public class DetailsFragment extends Fragment {
 
         statusLabel = (TextView)rootView.findViewById(R.id.details_status);
         statusLabel.setText(statusLabel.getText() + " " + item.getStatusString());
+        if (item.isOpen())
+            statusLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.colorIsOpen));
+        else
+            statusLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.colorIsClosed));
 
         bike_stands = (TextView)rootView.findViewById(R.id.bike_stands_details);
         bike_stands.setText(bike_stands.getText() + " " + item.getRooms());
