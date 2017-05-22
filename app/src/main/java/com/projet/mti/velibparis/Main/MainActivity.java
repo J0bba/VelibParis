@@ -47,6 +47,25 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     public void collectData()
     {
+        stations.clear();
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (!(networkInfo != null && networkInfo.isConnected()))
+        {
+            recyclerView.setVisibility(View.GONE);
+            TextView nointernet = (TextView)findViewById(R.id.no_internet_text);
+            nointernet.setVisibility(View.VISIBLE);
+            return;
+        }
+        else
+        {
+            recyclerView.setVisibility(View.VISIBLE);
+            TextView nointernet = (TextView)findViewById(R.id.no_internet_text);
+            nointernet.setVisibility(View.INVISIBLE);
+
+        }
+
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(WebService.ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -105,17 +124,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ListAdapter(stations);
         recyclerView.setAdapter(adapter);
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected())
-            collectData();
-        else
-        {
-            recyclerView.setVisibility(View.GONE);
-            TextView nointernet = (TextView)findViewById(R.id.no_internet_text);
-            nointernet.setVisibility(View.VISIBLE);
-        }
+
+        collectData();
 
     }
 
@@ -141,6 +151,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
+            case R.id.refresh :
+                collectData();
+                return true;
             case R.id.member_list :
                 Intent intent = new Intent(getBaseContext(), GroupDetailsActivity.class);
                 startActivity(intent);
