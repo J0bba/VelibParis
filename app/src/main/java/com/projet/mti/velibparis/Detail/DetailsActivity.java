@@ -60,7 +60,7 @@ public class DetailsActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         WebService webService = retrofit.create(WebService.class);
-        Call<WebServiceReturn> webServiceReturnCall = webService.callService("stations-velib-disponibilites-en-temps-reel", 1000);
+        Call<WebServiceReturn> webServiceReturnCall = webService.callService("stations-velib-disponibilites-en-temps-reel", 100);
         webServiceReturnCall.enqueue(new Callback<WebServiceReturn>() {
             @Override
             public void onResponse(Call<WebServiceReturn> call, Response<WebServiceReturn> response) {

@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -24,7 +24,6 @@ import com.projet.mti.velibparis.GroupDetails.GroupDetailsActivity;
 import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
 import com.projet.mti.velibparis.WebService;
-
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         WebService webService = retrofit.create(WebService.class);
-        Call<WebServiceReturn> webServiceReturnCall = webService.callService("stations-velib-disponibilites-en-temps-reel", 1000);
+        Call<WebServiceReturn> webServiceReturnCall = webService.callService("stations-velib-disponibilites-en-temps-reel", 100);
         webServiceReturnCall.enqueue(new Callback<WebServiceReturn>() {
             @Override
             public void onResponse(Call<WebServiceReturn> call, Response<WebServiceReturn> response) {
@@ -139,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                                                     }
                                                 }
         );
+        SimpleDividerItemDecoration dividerItemDecoration = new SimpleDividerItemDecoration(getBaseContext());
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
     }
 

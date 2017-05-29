@@ -5,4 +5,5 @@
     <color name="colorAccent">#ffffff</color>
     <color name="colorIsOpen">#74dd34</color>
     <color name="colorIsClosed">#c62f2f</color>
+    <color name="dark_gray">#dadada</color>
 </resources>
