@@ -86,7 +86,7 @@ public class DetailsActivity extends AppCompatActivity {
                                                      recordsAPIs.get(i).getFields().getPosition().get(1)));
                     }
                     adapter.setData(stations);
-                    viewPager.setCurrentItem(getIndexByName(getIntent().getStringExtra("Station")));
+                    viewPager.setCurrentItem(getIndexByName(getIntent().getStringExtra("Station")), false);
                 } else {
                     //Error
                 }
