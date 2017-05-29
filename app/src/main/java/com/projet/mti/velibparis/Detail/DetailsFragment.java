@@ -1,7 +1,6 @@
 package com.projet.mti.velibparis.Detail;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 
 import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by Thiba on 15/05/2017.

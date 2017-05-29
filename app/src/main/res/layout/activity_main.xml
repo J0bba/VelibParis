@@ -21,18 +21,25 @@
         android:layout_height="wrap_content"
         android:text="@string/mainTitle"
         android:layout_below="@+id/my_toolbar"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/mainTitle"/>
+        android:layout_below="@id/mainTitle">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/no_internet_text"
-        android:layout_below="@id/recycler_view"
+        android:layout_below="@id/mainTitle"
         android:text="@string/no_internet"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
+
 
 </RelativeLayout>

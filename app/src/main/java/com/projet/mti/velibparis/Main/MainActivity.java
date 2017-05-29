@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<StationItem> stations = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public void collectData()
     {
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         WebService webService = retrofit.create(WebService.class);
-        Call<WebServiceReturn> webServiceReturnCall = webService.callService("stations-velib-disponibilites-en-temps-reel", 100);
+        Call<WebServiceReturn> webServiceReturnCall = webService.callService("stations-velib-disponibilites-en-temps-reel", 1000);
         webServiceReturnCall.enqueue(new Callback<WebServiceReturn>() {
             @Override
             public void onResponse(Call<WebServiceReturn> call, Response<WebServiceReturn> response) {
@@ -117,6 +119,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
+
+
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -125,6 +130,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         recyclerView.setAdapter(adapter);
 
         collectData();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+                                                    @Override
+                                                    public void onRefresh()
+                                                    {
+                                                        collectData();
+                                                        swipeRefreshLayout.setRefreshing(false);
+                                                    }
+                                                }
+        );
 
     }
 
@@ -150,9 +164,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
-            case R.id.refresh :
-                collectData();
-                return true;
             case R.id.member_list :
                 Intent intent = new Intent(getBaseContext(), GroupDetailsActivity.class);
                 startActivity(intent);
