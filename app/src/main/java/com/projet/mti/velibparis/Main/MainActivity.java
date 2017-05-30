@@ -23,13 +23,13 @@ import com.projet.mti.velibparis.API.WebServiceReturn;
 import com.projet.mti.velibparis.GroupDetails.GroupDetailsActivity;
 import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
+import com.projet.mti.velibparis.StationItemsList;
 import com.projet.mti.velibparis.WebService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private RecyclerView recyclerView;
     private ListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<StationItem> stations = new ArrayList<>();
+    private StationItemsList stations = new StationItemsList();
     private SwipeRefreshLayout swipeRefreshLayout;
 
     public void collectData()
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private void FilterStations(String text)
     {
-        List<StationItem> temp = new ArrayList<>();
+        StationItemsList temp = new StationItemsList();
         for (StationItem station : stations)
         {
             if (station.getName().toLowerCase().contains(text.toLowerCase()))

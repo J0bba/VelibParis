@@ -13,21 +13,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.projet.mti.velibparis.API.RecordsAPI;
 import com.projet.mti.velibparis.API.WebServiceReturn;
 import com.projet.mti.velibparis.GroupDetails.GroupDetailsActivity;
 import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
+import com.projet.mti.velibparis.StationItemsList;
 import com.projet.mti.velibparis.WebService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,10 +38,11 @@ public class DetailsActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private DetailsAdapter adapter;
-    private List<StationItem> stations = new ArrayList<>();
+    private StationItemsList stations = new StationItemsList();
 
     private int getIndexByName(String name)
     {
+
         for (int i = 0; i < stations.size(); i++)
         {
             if (stations.get(i).getName().equals(name))
@@ -54,7 +53,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void collectData()
     {
-        stations = new ArrayList<>();
+        //stations = new ArrayList<>();
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(WebService.ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -116,12 +115,12 @@ public class DetailsActivity extends AppCompatActivity {
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected())
-            collectData();
-        else {
-            viewPager.setVisibility(View.GONE);
-            TextView nointernet = (TextView) findViewById(R.id.no_internet_text);
-            nointernet.setVisibility(View.VISIBLE);
+        Intent intent = getIntent();
+        if (intent.hasExtra("StationItemsList"))
+        {
+            stations = intent.getParcelableExtra("StationItemsList");
+            adapter.setData(stations);
+            viewPager.setCurrentItem(getIndexByName(intent.getStringExtra("Station")), false);
         }
     }
 
