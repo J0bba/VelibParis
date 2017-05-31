@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         WebService webService = retrofit.create(WebService.class);
-        Call<WebServiceReturn> webServiceReturnCall = webService.callService("stations-velib-disponibilites-en-temps-reel", 100);
+        Call<WebServiceReturn> webServiceReturnCall = webService.callService("stations-velib-disponibilites-en-temps-reel", 650);
         webServiceReturnCall.enqueue(new Callback<WebServiceReturn>() {
             @Override
             public void onResponse(Call<WebServiceReturn> call, Response<WebServiceReturn> response) {

@@ -13,6 +13,11 @@ import android.widget.TextView;
 import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by Thiba on 15/05/2017.
  */
@@ -70,7 +75,9 @@ public class DetailsFragment extends Fragment {
         });
 
         last_update = (TextView)rootView.findViewById(R.id.last_update_details);
-        last_update.setText(last_update.getText() + " " + item.getUpdateDate().toString());
+        Date date = item.getUpdateDate();
+        PrettyTime p = new PrettyTime(new Locale("fr"));
+        last_update.setText(last_update.getText() + " " + p.format(date));
 
 
         return rootView;
