@@ -100,7 +100,8 @@ public class DetailsFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(item.getLatitude(), item.getLongitude())).title("Marker"));
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(item.getLatitude(), item.getLongitude())).title(item.getName()));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(item.getLatitude(), item.getLongitude()), 15.0f));
+        googleMap.getUiSettings().setScrollGesturesEnabled(false);
     }
 }
