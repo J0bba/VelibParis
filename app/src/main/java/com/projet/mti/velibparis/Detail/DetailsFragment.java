@@ -10,6 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.projet.mti.velibparis.R;
 import com.projet.mti.velibparis.StationItem;
 
@@ -22,7 +28,7 @@ import java.util.Locale;
  * Created by Thiba on 15/05/2017.
  */
 
-public class DetailsFragment extends Fragment {
+public class DetailsFragment extends Fragment implements OnMapReadyCallback {
     public static DetailsFragment newInstance(StationItem item)
     {
         DetailsFragment f = new DetailsFragment();
@@ -37,6 +43,7 @@ public class DetailsFragment extends Fragment {
     private TextView available_bike_stands;
     private TextView address;
     private TextView last_update;
+    private StationItem item;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +51,7 @@ public class DetailsFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.details_fragment, container, false);
 
-        final StationItem item = (StationItem) getArguments().getSerializable("item");
+        item = (StationItem) getArguments().getSerializable("item");
 
         textTitle = (TextView) rootView.findViewById(R.id.details_title);
         textTitle.setText(item.getName());
@@ -79,6 +86,9 @@ public class DetailsFragment extends Fragment {
         PrettyTime p = new PrettyTime(new Locale("fr"));
         last_update.setText(last_update.getText() + " " + p.format(date));
 
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
 
         return rootView;
     }
@@ -86,5 +96,11 @@ public class DetailsFragment extends Fragment {
     public void setDetails(StationItem item)
     {
         textTitle.setText(item.getName());
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(item.getLatitude(), item.getLongitude())).title("Marker"));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(item.getLatitude(), item.getLongitude()), 15.0f));
     }
 }
